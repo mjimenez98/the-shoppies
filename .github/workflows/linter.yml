@@ -22,4 +22,5 @@ jobs:
           VALIDATE_JSON: true
           VALIDATE_TSX: true
           VALIDATE_TYPESCRIPT_ES: true
+          TYPESCRIPT_ES_CONFIG_FILE: .eslintrc.json
           VALIDATE_YAML: true
