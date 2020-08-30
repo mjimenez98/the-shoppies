@@ -20,5 +20,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_EDITORCONFIG: true
           VALIDATE_JSON: true
+          VALIDATE_TSX: true
           VALIDATE_TYPESCRIPT_ES: true
           VALIDATE_YAML: true
