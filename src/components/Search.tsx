@@ -3,16 +3,20 @@ import {
   Col, Container, Form, Row,
 } from 'bootstrap-4-react';
 
-class Search extends React.Component<{}, { value: string }> {
+interface States {
+  searchValue: string
+}
+
+class Search extends React.Component<{}, States> {
   constructor(props: any) {
     super(props);
-    this.state = { value: '' };
+    this.state = { searchValue: '' };
 
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event: any) {
-    this.setState({ value: event.target.value });
+  private handleChange(event: any) {
+    this.setState({ searchValue: event.target.value });
   }
 
   render() {
@@ -27,7 +31,7 @@ class Search extends React.Component<{}, { value: string }> {
                   type="text"
                   id="movie"
                   placeholder="ex: Tenet"
-                  value={this.state.value}
+                  value={this.state.searchValue}
                   onChange={this.handleChange}
                 />
               </Form.Group>
