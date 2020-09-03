@@ -1,16 +1,16 @@
-name: Linter
+name: Server Tests
 
 on:
   [push]
 
 jobs:
   build:
-    name: Lint Code Base
+    name: Test Backend Code Base
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [8.x, 10.x, 12.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -18,8 +18,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: cd client
       - run: npm install
-      - run: npm run lint
+      - run: npm test
         env:
           CI: true
