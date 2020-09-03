@@ -6,7 +6,7 @@ const fetch = require("node-fetch");
 dotenv.config();
 
 const app = express();
-const directory = __dirname.replace('/server','');
+const directory = __dirname;
 
 // Serve static files from the React app
 app.use(express.static(path.join(directory, '/client/build')));
