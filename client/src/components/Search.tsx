@@ -5,6 +5,7 @@ import {
 
 class Movie {
   title: string;
+
   year: string;
 
   constructor(title: string, year: string) {
@@ -15,7 +16,8 @@ class Movie {
 
 interface States {
   movieResults: Array<Movie>,
-  searchValue: string
+  searchValue: string,
+  key: string,
 }
 
 class Search extends React.Component<{}, States> {
@@ -23,46 +25,41 @@ class Search extends React.Component<{}, States> {
     super(props);
     this.state = {
       movieResults: [],
-      searchValue: ''
+      searchValue: '',
+      key: '',
     };
 
-    this.getMoviesFromOMDb = this.getMoviesFromOMDb.bind(this);
+    this.getMovies = this.getMovies.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  private async getMoviesFromOMDb(search: string) {
-    try {
-      const apiKey = '';
-      const type = 'movie';
-      const s = search;
+  private async getMovies(search: string) {
+    let res;
 
-      await fetch('http://www.omdbapi.com/?' +
-        'apikey=' + apiKey +
-        '&type=' + type +
-        '&s=' + s)
-      .then(response => response.json())
-      .then(data => this.updateMovies(data));
+    try {
+      res = await fetch('/api/getMovies?search=' + search)
+        .then((response) => response.json())
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
-  };
+
+    this.updateMovies(res);
+  }
 
   private async updateMovies(res: any) {
-    if(res['Response'] === 'True') {
-      const resMovies = res['Search'];
-      const movies = resMovies.map((x: { [x: string]: string; }) => {
-        return new Movie(x['Title'], x['Year']);
-      });
+    if (res.Response === 'True') {
+      const resMovies = res.Search;
+      const movies = resMovies.map((x: { [x: string]: string; }) => new Movie(x.Title, x.Year));
 
-      this.setState({ movieResults: movies})
+      this.setState({ movieResults: movies });
     } else {
-      this.setState({ movieResults: [] })
+      this.setState({ movieResults: [] });
     }
   }
 
   private handleChange(event: any) {
     this.setState({ searchValue: event.target.value });
-    this.getMoviesFromOMDb(event.target.value);
+    this.getMovies(event.target.value);
   }
 
   render() {
@@ -86,13 +83,13 @@ class Search extends React.Component<{}, States> {
         </Row>
         <Row>
           <Col>
-          <div>
-            {this.state.movieResults.map((movie, index) => (
-              <li key={index}>
-                {movie.title + ' - ' + movie.year}
-              </li>
-            ))}
-          </div>
+            <div>
+              {this.state.movieResults.map((movie, index) => (
+                <li key={index}>
+                  {`${movie.title} - ${movie.year}`}
+                </li>
+              ))}
+            </div>
           </Col>
         </Row>
       </Container>

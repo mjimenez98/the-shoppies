@@ -1,6 +1,6 @@
 name: Linter
 
-on: 
+on:
   [push]
 
 jobs:
@@ -18,6 +18,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - run: cd client
       - run: npm install
       - run: npm run lint
         env:
