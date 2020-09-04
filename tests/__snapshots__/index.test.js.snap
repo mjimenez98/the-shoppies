@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Endpoints return OMDb movies 1`] = `
+Object {
+  "Search": Array [
+    Object {
+      "Poster": "https://m.media-amazon.com/images/M/MV5BYTE4ODEwZDUtNDFjOC00NjAxLWEzYTQtYTI1NGVmZmFlNjdiL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg",
+      "Title": "Vertigo",
+      "Type": "movie",
+      "Year": "1958",
+      "imdbID": "tt0052357",
+    },
+  ],
+}
+`;

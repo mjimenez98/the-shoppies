@@ -10,11 +10,12 @@
   "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon index.js",
-    "test": "npx jest tests/*",
+    "test": "npx jest --forceExit tests/*",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "devDependencies": {
     "jest": "^26.4.2",
+    "nock": "^13.0.4",
     "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
   }
