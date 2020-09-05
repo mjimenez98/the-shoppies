@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 
 import Header from '../components/Header';
-import Search from '../components/Search';
+import Body from '../components/Body';
 
 const App: FunctionComponent = () => (
   <div className="App">
     <Header />
-    <Search />
+    <Body />
   </div>
 );
 

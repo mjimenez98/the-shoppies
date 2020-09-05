@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Col, Container, Form, Row,
+  Form
 } from 'bootstrap-4-react';
 
 interface Movie {
@@ -69,35 +69,27 @@ class Search extends React.Component<unknown, States> {
   render(): React.ReactNode {
     const { searchValue, movieResults } = this.state;
     return (
-      <Container mt="5">
-        <Row justifyContent="center">
-          <Col col="md-6">
-            <Form>
-              <Form.Group>
-                <label htmlFor="search">Search for your favorite movies to nominate</label>
-                <Form.Input
-                  type="text"
-                  id="search"
-                  placeholder="ex: Tenet"
-                  value={searchValue}
-                  onChange={this.handleChange}
-                />
-              </Form.Group>
-            </Form>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div>
-              {movieResults.map((movie) => (
-                <li key={`${movie.title} - ${movie.year}`}>
-                  {`${movie.title} - ${movie.year}`}
-                </li>
-              ))}
-            </div>
-          </Col>
-        </Row>
-      </Container>
+      <div>
+        <Form>
+          <Form.Group>
+            <label htmlFor="search">Search for your favorite movies to nominate</label>
+            <Form.Input
+              type="text"
+              id="search"
+              placeholder="ex: Tenet"
+              value={searchValue}
+              onChange={this.handleChange}
+            />
+          </Form.Group>
+        </Form>
+        <div>
+          {movieResults.map((movie) => (
+            <li key={`${movie.title} - ${movie.year}`}>
+              {`${movie.title} - ${movie.year}`}
+            </li>
+          ))}
+        </div>
+      </div>
     );
   }
 }
