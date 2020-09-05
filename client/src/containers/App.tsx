@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 import Header from '../components/Header';
-import { Search } from '../components/Search';
+import Search from '../components/Search';
 
 const App: FunctionComponent = () => (
   <div className="App">

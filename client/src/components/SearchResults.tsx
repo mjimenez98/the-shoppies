@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Movie } from './Search';
+import { Movie } from './SearchBar';
 
 interface Props {
   movieResults: Array<Movie>,
@@ -8,9 +8,10 @@ interface Props {
 
 class SearchResults extends React.Component<Props, unknown> {
   render(): React.ReactNode {
+    const { movieResults } = this.props;
     return (
       <div>
-        {this.props.movieResults.map((movie: Movie) => (
+        {movieResults.map((movie: Movie) => (
           <li key={`${movie.title} (${movie.year})`}>
             {`${movie.title} (${movie.year})`}
           </li>

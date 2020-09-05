@@ -1,49 +1,42 @@
 import React from 'react';
 import { Col, Container, Row } from 'bootstrap-4-react';
 
-import SearchBar from './SearchBar';
+import { Movie, SearchBar } from './SearchBar';
 import SearchResults from './SearchResults';
-
-export interface Movie {
-  title: string,
-  year: string,
-}
-
-export interface OMDbMovie {
-  Title: string,
-  Year: string,
-}
 
 interface States {
   movieResults: Array<Movie>,
 }
 
-export class Search extends React.Component<unknown, States> {
+class Search extends React.Component<unknown, States> {
   constructor(props: unknown) {
     super(props);
     this.state = {
-      movieResults: []
-    }
+      movieResults: [],
+    };
   }
 
-  getMovies = (movieResults: Array<Movie>) => {
-    this.setState({movieResults: movieResults});
+  getMovies(movieResults: Array<Movie>): void {
+    this.setState({ movieResults });
   }
 
   render(): React.ReactNode {
+    const { movieResults } = this.state;
     return (
       <Container mt="5">
         <Row justifyContent="center">
           <Col col="md-6">
-            <SearchBar sendMovies={this.getMovies.bind(this)}/>
+            <SearchBar sendMovies={this.getMovies} />
           </Col>
         </Row>
         <Row justifyContent="center">
-          <Col col ="md-6">
-            <SearchResults movieResults={this.state.movieResults}/>
+          <Col col="md-6">
+            <SearchResults movieResults={movieResults} />
           </Col>
         </Row>
       </Container>
     );
   }
 }
+
+export default Search;
