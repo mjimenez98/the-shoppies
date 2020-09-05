@@ -2,6 +2,7 @@ import React from 'react';
 import { Col, Container, Row } from 'bootstrap-4-react';
 
 import SearchBar from './SearchBar';
+import SearchResults from './SearchResults';
 
 export interface Movie {
   title: string,
@@ -14,19 +15,19 @@ export interface OMDbMovie {
 }
 
 interface States {
-  movies: Array<Movie>,
+  movieResults: Array<Movie>,
 }
 
-export class Body extends React.Component<unknown, States> {
+export class Search extends React.Component<unknown, States> {
   constructor(props: unknown) {
     super(props);
     this.state = {
-      movies: []
+      movieResults: []
     }
   }
 
   getMovies = (movieResults: Array<Movie>) => {
-    this.setState({movies: movieResults});
+    this.setState({movieResults: movieResults});
   }
 
   render(): React.ReactNode {
@@ -37,14 +38,10 @@ export class Body extends React.Component<unknown, States> {
             <SearchBar sendMovies={this.getMovies.bind(this)}/>
           </Col>
         </Row>
-        <Row>
-          <div>
-            {this.state.movies.map((movie: Movie) => (
-              <li key={`${movie.title} - ${movie.year}`}>
-                {`${movie.title} - ${movie.year}`}
-              </li>
-            ))}
-          </div>
+        <Row justifyContent="center">
+          <Col col ="md-6">
+            <SearchResults movieResults={this.state.movieResults}/>
+          </Col>
         </Row>
       </Container>
     );

@@ -3,7 +3,7 @@ import {
   Form
 } from 'bootstrap-4-react';
 
-import { Movie, OMDbMovie } from './Body';
+import { Movie, OMDbMovie } from './Search';
 
 interface Props {
   sendMovies(movieResults: Array<Movie>): any,
