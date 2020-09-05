@@ -66,7 +66,7 @@ class Search extends React.Component<unknown, States> {
     this.getMovies(event.target.value);
   }
 
-  render() {
+  render(): React.ReactNode {
     const { searchValue, movieResults } = this.state;
     return (
       <Container mt="5">
