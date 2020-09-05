@@ -3,30 +3,27 @@ import {
   Col, Container, Form, Row,
 } from 'bootstrap-4-react';
 
-class Movie {
-  title: string;
+interface Movie {
+  title: string,
+  year: string,
+}
 
-  year: string;
-
-  constructor(title: string, year: string) {
-    this.title = title;
-    this.year = year;
-  }
+interface OMDbMovie {
+  Title: string,
+  Year: string,
 }
 
 interface States {
   movieResults: Array<Movie>,
   searchValue: string,
-  key: string,
 }
 
-class Search extends React.Component<{}, States> {
-  constructor(props: any) {
+class Search extends React.Component<unknown, States> {
+  constructor(props: unknown) {
     super(props);
     this.state = {
       movieResults: [],
       searchValue: '',
-      key: '',
     };
 
     this.getMovies = this.getMovies.bind(this);
@@ -37,8 +34,8 @@ class Search extends React.Component<{}, States> {
     let res;
 
     try {
-      res = await fetch('/api/getMovies?search=' + search)
-        .then((response) => response.json())
+      res = await fetch(`/api/getMovies?search=${search}`)
+        .then((response) => response.json());
     } catch (error) {
       console.log(error);
     }
@@ -46,10 +43,17 @@ class Search extends React.Component<{}, States> {
     this.updateMovies(res);
   }
 
-  private async updateMovies(res: any) {
+  private async updateMovies(res: { Response: string; Search: Array<OMDbMovie>; }) {
     if (res.Response === 'True') {
       const resMovies = res.Search;
-      const movies = resMovies.map((x: { [x: string]: string; }) => new Movie(x.Title, x.Year));
+      const movies = resMovies.map((movie) => {
+        const newMovie: Movie = {
+          title: movie.Title,
+          year: movie.Year,
+        };
+
+        return newMovie;
+      });
 
       this.setState({ movieResults: movies });
     } else {
@@ -57,24 +61,25 @@ class Search extends React.Component<{}, States> {
     }
   }
 
-  private handleChange(event: any) {
+  private handleChange(event: { target: { value: string; }; }) {
     this.setState({ searchValue: event.target.value });
     this.getMovies(event.target.value);
   }
 
   render() {
+    const { searchValue, movieResults } = this.state;
     return (
       <Container mt="5">
         <Row justifyContent="center">
           <Col col="md-6">
             <Form>
               <Form.Group>
-                <label htmlFor="Search">Search for your favorite movies to nominate</label>
+                <label htmlFor="search">Search for your favorite movies to nominate</label>
                 <Form.Input
                   type="text"
-                  id="movie"
+                  id="search"
                   placeholder="ex: Tenet"
-                  value={this.state.searchValue}
+                  value={searchValue}
                   onChange={this.handleChange}
                 />
               </Form.Group>
@@ -84,8 +89,8 @@ class Search extends React.Component<{}, States> {
         <Row>
           <Col>
             <div>
-              {this.state.movieResults.map((movie, index) => (
-                <li key={index}>
+              {movieResults.map((movie) => (
+                <li key={`${movie.title} - ${movie.year}`}>
                   {`${movie.title} - ${movie.year}`}
                 </li>
               ))}

@@ -26,6 +26,11 @@
   },
   "rules": {
     "@typescript-eslint/camelcase": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "jsx-a11y/label-has-associated-control": [ 2, {
+      "labelAttributes": ["label"],
+      "controlComponents": ["Form.Input"],
+      "depth": 3
+    }]
   }
 }
