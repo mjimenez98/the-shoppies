@@ -3,26 +3,20 @@ import {
   Form
 } from 'bootstrap-4-react';
 
-interface Movie {
-  title: string,
-  year: string,
-}
+import { Movie, OMDbMovie } from './Body';
 
-interface OMDbMovie {
-  Title: string,
-  Year: string,
+interface Props {
+  sendMovies(movieResults: Array<Movie>): any,
 }
 
 interface States {
-  movieResults: Array<Movie>,
   searchValue: string,
 }
 
-class Search extends React.Component<unknown, States> {
-  constructor(props: unknown) {
+class SearchBar extends React.Component<Props, States> {
+  constructor(props: Props) {
     super(props);
     this.state = {
-      movieResults: [],
       searchValue: '',
     };
 
@@ -30,6 +24,7 @@ class Search extends React.Component<unknown, States> {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  // Get movie results from OMDb API by calling the backend
   private async getMovies(search: string) {
     let res;
 
@@ -43,6 +38,7 @@ class Search extends React.Component<unknown, States> {
     this.updateMovies(res);
   }
 
+  // Parse movie results and send them to Parent component
   private async updateMovies(res: { Response: string; Search: Array<OMDbMovie>; }) {
     if (res.Response === 'True') {
       const resMovies = res.Search;
@@ -55,9 +51,7 @@ class Search extends React.Component<unknown, States> {
         return newMovie;
       });
 
-      this.setState({ movieResults: movies });
-    } else {
-      this.setState({ movieResults: [] });
+      this.props.sendMovies(movies);
     }
   }
 
@@ -67,7 +61,7 @@ class Search extends React.Component<unknown, States> {
   }
 
   render(): React.ReactNode {
-    const { searchValue, movieResults } = this.state;
+    const { searchValue } = this.state;
     return (
       <div>
         <Form>
@@ -82,16 +76,9 @@ class Search extends React.Component<unknown, States> {
             />
           </Form.Group>
         </Form>
-        <div>
-          {movieResults.map((movie) => (
-            <li key={`${movie.title} - ${movie.year}`}>
-              {`${movie.title} - ${movie.year}`}
-            </li>
-          ))}
-        </div>
       </div>
     );
   }
 }
 
-export default Search;
+export default SearchBar;
