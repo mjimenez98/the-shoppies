@@ -6,9 +6,21 @@ interface Props {
   movieResults: Array<Movie>,
 }
 
-class SearchResults extends React.Component<Props, unknown> {
+interface States {
+  movieNominated: string;
+}
+
+class SearchResults extends React.Component<Props, States> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      movieNominated: '',
+    };
+  }
+
   render(): React.ReactNode {
     const { movieResults } = this.props;
+    const { movieNominated } = this.state;
     return (
       <div>
         {movieResults.map((movie: Movie) => (
@@ -16,6 +28,7 @@ class SearchResults extends React.Component<Props, unknown> {
             {`${movie.title} (${movie.year})`}
           </li>
         ))}
+        <p>{movieNominated}</p>
       </div>
     );
   }
