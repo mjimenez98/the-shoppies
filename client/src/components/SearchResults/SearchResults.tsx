@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Movie } from './SearchBar';
+import { Movie } from '../SearchBar';
 import SearchResultsMovie from './SearchResultsMovie';
 
 interface Props {

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Movie } from './SearchBar';
+
+import { Movie } from '../SearchBar';
+import Nominee from './Nominee';
 
 interface Props {
   nominees: Array<Movie>,
@@ -15,9 +17,10 @@ class Nominations extends React.Component<Props, unknown> {
         </div>
         <div>
           {nominees.map((movie: Movie) => (
-            <li key={movie.key}>
-              {movie.key}
-            </li>
+            <Nominee
+              key={movie.title}
+              movie={movie}
+            />
           ))}
         </div>
       </div>

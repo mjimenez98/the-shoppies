@@ -3,7 +3,7 @@ import {
   Col, Button, Row,
 } from 'bootstrap-4-react';
 
-import { Movie } from './SearchBar';
+import { Movie } from '../SearchBar';
 
 interface Props {
   movie: Movie,
@@ -31,7 +31,7 @@ class SearchResultsMovie extends React.Component<Props, States> {
     return (
       <Row my="2" alignItems="center">
         <Col>
-          <div>
+          <div key={movie.key}>
             { movie.key }
           </div>
         </Col>

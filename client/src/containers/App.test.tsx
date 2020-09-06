@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { Navbar } from 'bootstrap-4-react';
 import Header from '../components/Header';
 import { SearchBar, Movie } from '../components/SearchBar';
-import SearchResults from '../components/SearchResults';
+import SearchResults from '../components/SearchResults/SearchResults';
 
 configure({ adapter: new Adapter() });
 
@@ -28,8 +28,8 @@ describe('Search', () => {
   });
 
   test('movie results are rendered', () => {
-    const movies: Movie[] = [{ title: 'Tenet', year: '2020' }];
-    const wrapper = shallow(<SearchResults movieResults={movies} />);
+    const movies: Movie[] = [{ key: 'Tenet (2020)', title: 'Tenet', year: '2020' }];
+    const wrapper = shallow(<SearchResults movieResults={movies} sendNominee={() => {}} />);
 
     const component = wrapper.find('li');
     expect(component.at(0).key()).toEqual('Tenet (2020)');

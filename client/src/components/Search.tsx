@@ -2,8 +2,8 @@ import React from 'react';
 import { Col, Container, Row } from 'bootstrap-4-react';
 
 import { Movie, SearchBar } from './SearchBar';
-import SearchResults from './SearchResults';
-import Nominations from './Nominations';
+import SearchResults from './SearchResults/SearchResults';
+import Nominations from './Nominations/Nominations';
 
 interface States {
   movieResults: Array<Movie>,
