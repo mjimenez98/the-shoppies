@@ -1,11 +1,11 @@
-name: Linter
+name: Server Tests
 
-on: 
+on:
   [push]
 
 jobs:
   build:
-    name: Lint Code Base
+    name: Test Backend Code Base
     runs-on: ubuntu-latest
 
     strategy:
@@ -19,6 +19,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: npm run lint
+      - run: npm test
         env:
           CI: true
