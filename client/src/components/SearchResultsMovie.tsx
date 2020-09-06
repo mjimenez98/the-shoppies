@@ -3,39 +3,44 @@ import {
   Col, Button, Row,
 } from 'bootstrap-4-react';
 
+import { Movie } from './SearchBar';
+
 interface Props {
-  title: string,
+  movie: Movie,
+  sendNominee(movie: Movie): void,
 }
 
 interface States {
-  nominated: string,
+  nominated: Movie,
 }
 
 class SearchResultsMovie extends React.Component<Props, States> {
   constructor(props: Props) {
     super(props);
-    this.state = {
-      nominated: '',
-    };
+
+    this.sendNominee = this.sendNominee.bind(this);
   }
 
-  render() {
-    const { title } = this.props;
-    const { nominated } = this.state;
+  private sendNominee(): void {
+    const { movie, sendNominee } = this.props;
+    sendNominee(movie);
+  }
+
+  render(): React.ReactNode {
+    const { movie } = this.props;
     return (
       <Row my="2" alignItems="center">
         <Col>
           <div>
-            { title }
+            { movie.key }
           </div>
         </Col>
         <Col>
           <div>
-            <Button light sm>Nominate</Button>
+            <Button light sm onClick={this.sendNominee}>Nominate</Button>
           </div>
         </Col>
-      <p>{ nominated }</p>
-    </Row>
+      </Row>
     );
   }
 }

@@ -4,6 +4,7 @@ import {
 } from 'bootstrap-4-react';
 
 export interface Movie {
+  key: string,
   title: string,
   year: string,
 }
@@ -54,6 +55,7 @@ export class SearchBar extends React.Component<Props, States> {
 
       const movies = resMovies.map((movie) => {
         const newMovie: Movie = {
+          key: `${movie.Title} (${movie.Year})`,
           title: movie.Title,
           year: movie.Year,
         };
