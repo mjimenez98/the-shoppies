@@ -14,6 +14,8 @@ class Search extends React.Component<unknown, States> {
     this.state = {
       movieResults: [],
     };
+
+    this.getMovies = this.getMovies.bind(this);
   }
 
   getMovies(movieResults: Array<Movie>): void {

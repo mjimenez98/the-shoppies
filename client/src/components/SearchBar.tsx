@@ -14,7 +14,7 @@ export interface OMDbMovie {
 }
 
 interface Props {
-  sendMovies(movieResults: Array<Movie>): unknown,
+  sendMovies(movieResults: Array<Movie>): void,
 }
 
 interface States {
