@@ -11,25 +11,25 @@ configure({ adapter: new Adapter() });
 
 describe('Navbar', () => {
   test('renders title in navbar', () => {
-    const wrapper = mount(<Header />)
-    const component = wrapper.find(Navbar.Brand)
-    expect(component.text()).toEqual('The Shoppies')
+    const wrapper = mount(<Header />);
+    const component = wrapper.find(Navbar.Brand);
+    expect(component.text()).toEqual('The Shoppies');
   });
 });
 
 describe('Search', () => {
   test('searchValue state is updated after input change', () => {
-    const wrapper = shallow(<SearchBar sendMovies={() => {}} />)
+    const wrapper = shallow(<SearchBar sendMovies={() => {}} />);
 
     const component = wrapper.find('#search');
-    component.simulate('change', {target: {value: 'Ten'}});
+    component.simulate('change', { target: { value: 'Ten' } });
 
     expect(wrapper.state('searchValue')).toBe('Ten');
   });
 
   test('movie results are rendered', () => {
-    const movies: Movie[] = [{title: "Tenet", year: "2020"}]
-    const wrapper = shallow(<SearchResults movieResults={movies}/>)
+    const movies: Movie[] = [{ title: 'Tenet', year: '2020' }];
+    const wrapper = shallow(<SearchResults movieResults={movies} />);
 
     const component = wrapper.find('li');
     expect(component.at(0).key()).toEqual('Tenet (2020)');
