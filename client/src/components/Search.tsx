@@ -25,15 +25,15 @@ class Search extends React.Component<unknown, States> {
   render(): React.ReactNode {
     const { movieResults } = this.state;
     return (
-      <Container>
-        <Container my="5">
+      <Container fluid>
+        <Container fluid my="5">
           <Row justifyContent="center">
             <Col col="md-6">
               <SearchBar sendMovies={this.getMovies} />
             </Col>
           </Row>
         </Container>
-        <Container>
+        <Container fluid>
           <Row>
             <Col col="md-6">
               <SearchResults movieResults={movieResults} />
