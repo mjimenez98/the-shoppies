@@ -1,31 +1,28 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { configure, shallow, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
+import { Navbar } from 'bootstrap-4-react';
 import Header from '../components/Header';
 import { SearchBar } from '../components/SearchBar';
 
-
+configure({ adapter: new Adapter() });
 
 describe('Navbar', () => {
-  test('renders title in navbar', () => {
-    const { getByText } = render(<Header />);
-    const title = getByText(/The Shoppies/);
-    expect(title).toBeInTheDocument();
+  test.only('renders title in navbar', () => {
+    const wrapper = mount(<Header />)
+    const component = wrapper.find(Navbar.Brand)
+    expect(component.text()).toEqual('The Shoppies')
   });
 });
 
-describe('Search bar', () => {
-  test('input is working successfully', () => {
-    const component = render(<SearchBar sendMovies={() => {}} />)
+describe('SearchBar', () => {
+  test.only('search state value is updated after input change', () => {
+    const wrapper = shallow(<SearchBar sendMovies={() => {}} />)
 
-    userEvent.type(screen.getByLabelText(
-      /Search for your favorite movies to nominate/i),
-      'Ten'
-    )
+    const component = wrapper.find('#search');
+    component.simulate('change', {target: {value: 'Ten'}});
 
-    expect(screen.getByLabelText(
-      /Search for your favorite movies to nominate/i)
-    ).toHaveValue('Ten')
+    expect(wrapper.state('searchValue')).toBe('Ten');
   });
 });
