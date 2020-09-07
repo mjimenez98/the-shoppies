@@ -26,7 +26,7 @@ describe('Search', () => {
       <SearchBar
         nominees={nominees}
         isNominated={() => -1}
-        isInMovieResults={() => -1}
+        keyIndexInMovieResults={() => -1}
         sendMovies={() => {}}
       />,
     );

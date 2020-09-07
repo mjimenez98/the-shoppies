@@ -22,8 +22,8 @@ class Search extends React.Component<unknown, States> {
     this.getMovies = this.getMovies.bind(this);
     this.addNominee = this.addNominee.bind(this);
     this.removeNominee = this.removeNominee.bind(this);
-    this.isNominated = this.isNominated.bind(this);
-    this.isNominated = this.isNominated.bind(this);
+    this.keyIndexInNominees = this.keyIndexInNominees.bind(this);
+    this.keyIndexInNominees = this.keyIndexInNominees.bind(this);
   }
 
   private getMovies(movieResults: Array<Movie>): void {
@@ -32,13 +32,13 @@ class Search extends React.Component<unknown, States> {
 
   private addNominee(movie: Movie): void {
     const { movieResults, nominees } = this.state;
-    const isNominated = this.isNominated(movie.key);
-    const isInMovieResults = this.isInMovieResults(movie.key);
+    const isNominated = this.keyIndexInNominees(movie.key);
+    const keyIndexInMovieResults = this.keyIndexInMovieResults(movie.key);
 
     if (nominees.length < 5 && isNominated === -1) {
       const newNominees = nominees;
 
-      movieResults[isInMovieResults].nominated = true;
+      movieResults[keyIndexInMovieResults].nominated = true;
       newNominees.push(movie);
 
       this.setState({ nominees: newNominees });
@@ -47,15 +47,15 @@ class Search extends React.Component<unknown, States> {
 
   private removeNominee(movie: Movie): void {
     const { movieResults, nominees } = this.state;
-    const isNominated = this.isNominated(movie.key);
-    const isInMovieResults = this.isInMovieResults(movie.key);
+    const isNominated = this.keyIndexInNominees(movie.key);
+    const keyIndexInMovieResults = this.keyIndexInMovieResults(movie.key);
 
     if (isNominated !== -1) {
       let newNominees = nominees;
       const index = newNominees.indexOf(movie);
 
-      if (isInMovieResults !== -1) {
-        movieResults[isInMovieResults].nominated = false;
+      if (keyIndexInMovieResults !== -1) {
+        movieResults[keyIndexInMovieResults].nominated = false;
       }
 
       if (index === 0 && newNominees.length === 1) newNominees = [];
@@ -69,7 +69,7 @@ class Search extends React.Component<unknown, States> {
    * Queries the nominees list to see if a passed movie key is in there
    * Returns the index of the movie in the nominees list if found, otherwise returns -1
    */
-  private isNominated(key: string): number {
+  private keyIndexInNominees(key: string): number {
     const { nominees } = this.state;
     let nominatedIndex = -1;
 
@@ -82,7 +82,11 @@ class Search extends React.Component<unknown, States> {
     return nominatedIndex;
   }
 
-  private isInMovieResults(key: string): number {
+  /*
+   * Queries the movie results list to see if a passed movie key is in there
+   * Returns the index of the movie in the nominees list if found, otherwise returns -1
+   */
+  private keyIndexInMovieResults(key: string): number {
     const { movieResults } = this.state;
     let resultsIndex = -1;
 
@@ -113,8 +117,8 @@ class Search extends React.Component<unknown, States> {
             <Col col="md-6">
               <SearchBar
                 nominees={nominees}
-                isNominated={this.isNominated}
-                isInMovieResults={this.isInMovieResults}
+                isNominated={this.keyIndexInNominees}
+                keyIndexInMovieResults={this.keyIndexInMovieResults}
                 sendMovies={this.getMovies}
               />
             </Col>
