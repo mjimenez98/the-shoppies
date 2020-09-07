@@ -2,10 +2,11 @@ import React from 'react';
 import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import { Navbar } from 'bootstrap-4-react';
+import { Button, Navbar } from 'bootstrap-4-react';
 import Header from '../components/Header';
 import { SearchBar, Movie } from '../components/Search/SearchBar';
 import SearchResults from '../components/Search/SearchResults/SearchResults';
+import SearchResultsMovie from '../components/Search/SearchResults/SearchResultsMovie';
 
 configure({ adapter: new Adapter() });
 
@@ -19,7 +20,15 @@ describe('Navbar', () => {
 
 describe('Search', () => {
   test('searchValue state is updated after input change', () => {
-    const wrapper = shallow(<SearchBar sendMovies={() => {}} />);
+    const nominees: Movie[] = [];
+
+    const wrapper = shallow(
+      <SearchBar
+        nominees={nominees}
+        isNominated={() => {return false}}
+        sendMovies={() => {}}
+      />
+    );
 
     const component = wrapper.find('#search');
     component.simulate('change', { target: { value: 'Ten' } });
@@ -28,10 +37,22 @@ describe('Search', () => {
   });
 
   test('movie results are rendered', () => {
-    const movies: Movie[] = [{ key: 'Tenet (2020)', title: 'Tenet', year: '2020' }];
-    const wrapper = shallow(<SearchResults movieResults={movies} sendNominee={() => {}} />);
+    const movies: Movie[] = [
+      { key: 'Tenet (2020)',
+      title: 'Tenet',
+      year: '2020',
+      nominated: false }
+    ];
 
-    const component = wrapper.find('li');
-    expect(component.at(0).key()).toEqual('Tenet (2020)');
+    const wrapper = mount(
+      <SearchResults
+        movieResults={movies}
+        addNominee={() => {}}
+      />
+    );
+
+    const component = wrapper.find(SearchResultsMovie);
+    expect(component.find('div').at(1).text()).toEqual(movies[0].key);
+    expect(component.find(Button).text()).toEqual('Nominate');
   });
 });

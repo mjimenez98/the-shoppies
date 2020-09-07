@@ -8,11 +8,7 @@ interface Props {
   addNominee(movie: Movie): void,
 }
 
-interface States {
-  movieNominated: string;
-}
-
-class SearchResults extends React.Component<Props, States> {
+class SearchResults extends React.Component<Props, unknown> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -29,7 +25,6 @@ class SearchResults extends React.Component<Props, States> {
 
   render(): React.ReactNode {
     const { movieResults, addNominee } = this.props;
-    const { movieNominated } = this.state;
     return (
       <div>
         <div>
@@ -43,7 +38,6 @@ class SearchResults extends React.Component<Props, States> {
               addNominee={addNominee}
             />
           ))}
-          <p>{movieNominated}</p>
         </div>
       </div>
     );
