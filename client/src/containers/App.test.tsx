@@ -25,9 +25,10 @@ describe('Search', () => {
     const wrapper = shallow(
       <SearchBar
         nominees={nominees}
-        isNominated={() => {return false}}
+        isNominated={() => -1}
+        isInMovieResults={() => -1}
         sendMovies={() => {}}
-      />
+      />,
     );
 
     const component = wrapper.find('#search');
@@ -38,17 +39,19 @@ describe('Search', () => {
 
   test('movie results are rendered', () => {
     const movies: Movie[] = [
-      { key: 'Tenet (2020)',
-      title: 'Tenet',
-      year: '2020',
-      nominated: false }
+      {
+        key: 'Tenet (2020)',
+        title: 'Tenet',
+        year: '2020',
+        nominated: false,
+      },
     ];
 
     const wrapper = mount(
       <SearchResults
         movieResults={movies}
         addNominee={() => {}}
-      />
+      />,
     );
 
     const component = wrapper.find(SearchResultsMovie);

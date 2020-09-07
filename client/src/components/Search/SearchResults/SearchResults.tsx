@@ -11,9 +11,6 @@ interface Props {
 class SearchResults extends React.Component<Props, unknown> {
   constructor(props: Props) {
     super(props);
-    this.state = {
-      movieNominated: '',
-    };
 
     this.addNominee = this.addNominee.bind(this);
   }
