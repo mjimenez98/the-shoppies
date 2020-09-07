@@ -5,11 +5,23 @@ import Nominee from './Nominee';
 
 interface Props {
   nominees: Array<Movie>,
+  removeNominee(movie: Movie): void,
 }
 
 class Nominations extends React.Component<Props, unknown> {
+  constructor(props: Props) {
+    super(props);
+
+    this.removeNominee = this.removeNominee.bind(this);
+  }
+
+  removeNominee(movie: Movie): void {
+    const { removeNominee } = this.props;
+    removeNominee(movie);
+  }
+
   render(): React.ReactNode {
-    const { nominees } = this.props;
+    const { nominees, removeNominee } = this.props;
     return (
       <div>
         <div>
@@ -20,6 +32,7 @@ class Nominations extends React.Component<Props, unknown> {
             <Nominee
               key={movie.title}
               movie={movie}
+              removeNominee={removeNominee}
             />
           ))}
         </div>

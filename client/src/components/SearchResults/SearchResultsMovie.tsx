@@ -7,7 +7,7 @@ import { Movie } from '../SearchBar';
 
 interface Props {
   movie: Movie,
-  sendNominee(movie: Movie): void,
+  addNominee(movie: Movie): void,
 }
 
 interface States {
@@ -18,12 +18,12 @@ class SearchResultsMovie extends React.Component<Props, States> {
   constructor(props: Props) {
     super(props);
 
-    this.sendNominee = this.sendNominee.bind(this);
+    this.addNominee = this.addNominee.bind(this);
   }
 
-  private sendNominee(): void {
-    const { movie, sendNominee } = this.props;
-    sendNominee(movie);
+  private addNominee(): void {
+    const { movie, addNominee } = this.props;
+    addNominee(movie);
   }
 
   render(): React.ReactNode {
@@ -37,7 +37,7 @@ class SearchResultsMovie extends React.Component<Props, States> {
         </Col>
         <Col>
           <div>
-            <Button light sm onClick={this.sendNominee}>Nominate</Button>
+            <Button light sm onClick={this.addNominee}>Nominate</Button>
           </div>
         </Col>
       </Row>

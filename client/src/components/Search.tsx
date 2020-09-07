@@ -19,14 +19,15 @@ class Search extends React.Component<unknown, States> {
     };
 
     this.getMovies = this.getMovies.bind(this);
-    this.getNominee = this.getNominee.bind(this);
+    this.addNominee = this.addNominee.bind(this);
+    this.removeNominee = this.removeNominee.bind(this);
   }
 
   getMovies(movieResults: Array<Movie>): void {
     this.setState({ movieResults });
   }
 
-  getNominee(movie: Movie): void {
+  addNominee(movie: Movie): void {
     const { nominees } = this.state;
     const newNominees = nominees;
 
@@ -34,6 +35,20 @@ class Search extends React.Component<unknown, States> {
       console.error('An already nominated movie has been received again for a nomination');
     } else {
       newNominees.push(movie);
+    }
+
+    this.setState({ nominees: newNominees })
+  }
+
+  removeNominee(movie: Movie): void {
+    const { nominees } = this.state;
+    let newNominees = nominees;
+
+    if (nominees.includes(movie)) {
+      const index = newNominees.indexOf(movie);
+      (index === 0) ? newNominees = [] : newNominees.splice(1, index);
+    } else {
+      console.error('A non-nominated movie has been selected for removal');
     }
 
     this.setState({ nominees: newNominees })
@@ -54,10 +69,10 @@ class Search extends React.Component<unknown, States> {
           <Row>
             <Col col="md-6">
               {/* <SearchResults movieResults={movieResults} /> */}
-              <SearchResults movieResults={movieResults} sendNominee={this.getNominee} />
+              <SearchResults movieResults={movieResults} addNominee={this.addNominee} />
             </Col>
             <Col col="md-6">
-              <Nominations nominees={nominees} />
+              <Nominations nominees={nominees} removeNominee={this.removeNominee}/>
             </Col>
           </Row>
         </Container>

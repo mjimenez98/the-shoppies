@@ -5,7 +5,7 @@ import SearchResultsMovie from './SearchResultsMovie';
 
 interface Props {
   movieResults: Array<Movie>,
-  sendNominee(movie: Movie): void,
+  addNominee(movie: Movie): void,
 }
 
 interface States {
@@ -19,16 +19,16 @@ class SearchResults extends React.Component<Props, States> {
       movieNominated: '',
     };
 
-    this.sendNominee = this.sendNominee.bind(this);
+    this.addNominee = this.addNominee.bind(this);
   }
 
-  private sendNominee(movie: Movie) {
-    const { sendNominee } = this.props;
-    sendNominee(movie);
+  private addNominee(movie: Movie) {
+    const { addNominee } = this.props;
+    addNominee(movie);
   }
 
   render(): React.ReactNode {
-    const { movieResults, sendNominee } = this.props;
+    const { movieResults, addNominee } = this.props;
     const { movieNominated } = this.state;
     return (
       <div>
@@ -40,7 +40,7 @@ class SearchResults extends React.Component<Props, States> {
             <SearchResultsMovie
               key={movie.key}
               movie={movie}
-              sendNominee={sendNominee}
+              addNominee={addNominee}
             />
           ))}
           <p>{movieNominated}</p>

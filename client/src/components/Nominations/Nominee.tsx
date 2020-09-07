@@ -6,11 +6,19 @@ import { Movie } from '../SearchBar';
 
 interface Props {
   movie: Movie,
+  removeNominee(movie: Movie): void,
 }
 
 class Nominee extends React.Component<Props, unknown> {
-  private removeNominee() {
+  constructor(props: Props) {
+    super(props);
 
+    this.removeNominee = this.removeNominee.bind(this);
+  }
+
+  private removeNominee() {
+    const { movie, removeNominee } = this.props;
+    removeNominee(movie);
   }
 
   render(): React.ReactNode {
