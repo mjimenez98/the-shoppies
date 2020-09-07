@@ -103,7 +103,7 @@ class Search extends React.Component<unknown, States> {
     const { movieResults, nominees } = this.state;
     return (
       <Container fluid>
-        { (nominees.length === 5)
+        {(nominees.length === 5)
           ? (
             <Container>
               <Row justifyContent="center">
