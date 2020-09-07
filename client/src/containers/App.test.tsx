@@ -4,8 +4,8 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import { Navbar } from 'bootstrap-4-react';
 import Header from '../components/Header';
-import { SearchBar, Movie } from '../components/SearchBar';
-import SearchResults from '../components/SearchResults/SearchResults';
+import { SearchBar, Movie } from '../components/Search/SearchBar';
+import SearchResults from '../components/Search/SearchResults/SearchResults';
 
 configure({ adapter: new Adapter() });
 

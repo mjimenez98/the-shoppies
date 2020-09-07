@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Container, Row } from 'bootstrap-4-react';
 
+import Banner from './Banner';
 import { Movie, SearchBar } from './SearchBar';
 import SearchResults from './SearchResults/SearchResults';
 import Nominations from './Nominations/Nominations';
@@ -30,9 +31,10 @@ class Search extends React.Component<unknown, States> {
 
   private addNominee(movie: Movie): void {
     const { movieResults, nominees } = this.state;
-    const newNominees = nominees;
 
-    if (!this.isNominated(movie.key)) {
+    if (nominees.length < 5 && !this.isNominated(movie.key)) {
+      const newNominees = nominees;
+
       movie.nominated = true;
       movieResults[movieResults.indexOf(movie)].nominated = true;
       newNominees.push(movie);
@@ -43,15 +45,15 @@ class Search extends React.Component<unknown, States> {
 
   private removeNominee(movie: Movie): void {
     const { movieResults, nominees } = this.state;
-    let newNominees = nominees;
 
     if (this.isNominated(movie.key)) {
+      let newNominees = nominees;
+      const index = newNominees.indexOf(movie);
+
       movie.nominated = false;
 
       if (movieResults.indexOf(movie) > -1)
         movieResults[movieResults.indexOf(movie)].nominated = false;
-
-      const index = newNominees.indexOf(movie);
 
       if (index === 0 && newNominees.length === 1)
         newNominees = []
@@ -66,8 +68,8 @@ class Search extends React.Component<unknown, States> {
     const { nominees } = this.state;
     let nominated = false;
 
-    nominees.forEach(element => {
-      if (key.localeCompare(element.key) === 0) {
+    nominees.forEach(movie => {
+      if (key.localeCompare(movie.key) === 0) {
         nominated = true;
         return
       }
@@ -80,6 +82,14 @@ class Search extends React.Component<unknown, States> {
     const { movieResults, nominees } = this.state;
     return (
       <Container fluid>
+        { (nominees.length === 5) ?
+          (<Container>
+            <Row justifyContent="center">
+              <Banner />
+            </Row>
+          </Container>) :
+          (null)
+        }
         <Container fluid my="5">
           <Row justifyContent="center">
             <Col col="md-6">
@@ -93,7 +103,6 @@ class Search extends React.Component<unknown, States> {
         <Container fluid>
           <Row>
             <Col col="md-6">
-              {/* <SearchResults movieResults={movieResults} /> */}
               <SearchResults movieResults={movieResults} addNominee={this.addNominee} />
             </Col>
             <Col col="md-6">
