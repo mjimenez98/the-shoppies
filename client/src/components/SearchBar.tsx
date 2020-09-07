@@ -7,6 +7,7 @@ export interface Movie {
   key: string,
   title: string,
   year: string,
+  nominated: boolean,
 }
 
 export interface OMDbMovie {
@@ -15,6 +16,8 @@ export interface OMDbMovie {
 }
 
 interface Props {
+  nominees: Array<Movie>,
+  isNominated(key: string): boolean,
   sendMovies(movieResults: Array<Movie>): void,
 }
 
@@ -31,6 +34,12 @@ export class SearchBar extends React.Component<Props, States> {
 
     this.getMovies = this.getMovies.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.isNominated = this.isNominated.bind(this);
+  }
+
+  private isNominated(key: string): boolean {
+    const { isNominated } = this.props;
+    return isNominated(key);
   }
 
   // Get movie results from OMDb API by calling the backend
@@ -58,6 +67,7 @@ export class SearchBar extends React.Component<Props, States> {
           key: `${movie.Title} (${movie.Year})`,
           title: movie.Title,
           year: movie.Year,
+          nominated: this.isNominated(`${movie.Title} (${movie.Year})`),
         };
 
         return newMovie;

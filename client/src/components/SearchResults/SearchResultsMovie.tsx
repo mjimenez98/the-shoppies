@@ -37,7 +37,12 @@ class SearchResultsMovie extends React.Component<Props, States> {
         </Col>
         <Col>
           <div>
-            <Button light sm onClick={this.addNominee}>Nominate</Button>
+            <Button
+              light sm
+              disabled={movie.nominated}
+              onClick={this.addNominee}>
+                Nominate
+            </Button>
           </div>
         </Col>
       </Row>

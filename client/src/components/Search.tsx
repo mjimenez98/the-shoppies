@@ -21,37 +21,59 @@ class Search extends React.Component<unknown, States> {
     this.getMovies = this.getMovies.bind(this);
     this.addNominee = this.addNominee.bind(this);
     this.removeNominee = this.removeNominee.bind(this);
+    this.isNominated = this.isNominated.bind(this);
   }
 
-  getMovies(movieResults: Array<Movie>): void {
+  private getMovies(movieResults: Array<Movie>): void {
     this.setState({ movieResults });
   }
 
-  addNominee(movie: Movie): void {
-    const { nominees } = this.state;
+  private addNominee(movie: Movie): void {
+    const { movieResults, nominees } = this.state;
     const newNominees = nominees;
 
-    if (nominees.includes(movie)) {
-      console.error('An already nominated movie has been received again for a nomination');
-    } else {
+    if (!this.isNominated(movie.key)) {
+      movie.nominated = true;
+      movieResults[movieResults.indexOf(movie)].nominated = true;
       newNominees.push(movie);
-    }
 
-    this.setState({ nominees: newNominees })
+      this.setState({ nominees: newNominees })
+    }
   }
 
-  removeNominee(movie: Movie): void {
-    const { nominees } = this.state;
+  private removeNominee(movie: Movie): void {
+    const { movieResults, nominees } = this.state;
     let newNominees = nominees;
 
-    if (nominees.includes(movie)) {
-      const index = newNominees.indexOf(movie);
-      (index === 0) ? newNominees = [] : newNominees.splice(1, index);
-    } else {
-      console.error('A non-nominated movie has been selected for removal');
-    }
+    if (this.isNominated(movie.key)) {
+      movie.nominated = false;
 
-    this.setState({ nominees: newNominees })
+      if (movieResults.indexOf(movie) > -1)
+        movieResults[movieResults.indexOf(movie)].nominated = false;
+
+      const index = newNominees.indexOf(movie);
+
+      if (index === 0 && newNominees.length === 1)
+        newNominees = []
+      else
+        newNominees.splice(newNominees.indexOf(movie), 1);
+
+      this.setState({ nominees: newNominees })
+    }
+  }
+
+  private isNominated(key: string): boolean {
+    const { nominees } = this.state;
+    let nominated = false;
+
+    nominees.forEach(element => {
+      if (key.localeCompare(element.key) === 0) {
+        nominated = true;
+        return
+      }
+    });
+
+    return nominated;
   }
 
   render(): React.ReactNode {
@@ -61,7 +83,10 @@ class Search extends React.Component<unknown, States> {
         <Container fluid my="5">
           <Row justifyContent="center">
             <Col col="md-6">
-              <SearchBar sendMovies={this.getMovies} />
+              <SearchBar
+                nominees={nominees}
+                isNominated={this.isNominated}
+                sendMovies={this.getMovies} />
             </Col>
           </Row>
         </Container>
