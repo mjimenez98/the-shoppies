@@ -8,13 +8,14 @@ This project has been created with the purpose of participating in Shopify's Win
 
 ## Setup
 1. Clone the repo using your favorite method.
-2. Open two tabs in the terminal.
-2. Tab 1: `cd ~/the-shoppies`
-3. Tab 1: `npm install`
-4. Tab 2: `cd ~/the-shoppies/client/`
-5. Tab 2:`npm install && npm run build`
-6. Tab 2: `npm run start-dev`
-7. Tab 1: `npm start`
+2. Go to `~/the-shoppies/.env-example` and follow the instructions there to set environment variables.
+3. Open two tabs in the terminal.
+4. Tab 1: `cd ~/the-shoppies`
+5. Tab 1: `npm install`
+6. Tab 1: `npm start`
+7. Tab 2: `cd ~/the-shoppies/client/`
+8. Tab 2:`npm install && npm run build`
+9. Tab 2: `npm run start-dev`
 
 ## Usage
 The Shoppies contains one Express API server at the root of the project structure, and one React app in `~/the-shoppies/client/`.
