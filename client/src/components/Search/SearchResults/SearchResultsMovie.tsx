@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BDiv, Col, Button, Row, Container
+  BDiv, Col, Button, Row, Container,
 } from 'bootstrap-4-react';
 
 import { Movie } from '../SearchBar';
