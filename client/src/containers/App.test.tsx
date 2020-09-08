@@ -13,6 +13,11 @@ import Nominee from '../components/Search/Nominations/Nominee';
 import Search from '../components/Search/Search';
 import Banner from '../components/Search/Banner';
 
+import {
+  movies as moviesFixture,
+  fullNomineesList as fullNomineesListFixture,
+} from '../fixtures/Movie';
+
 configure({ adapter: new Adapter() });
 
 describe('Navbar', () => {
@@ -43,14 +48,7 @@ describe('Search', () => {
   });
 
   test('movie results are rendered', () => {
-    const movies: Movie[] = [
-      {
-        key: 'Tenet (2020)',
-        title: 'Tenet',
-        year: '2020',
-        nominated: false,
-      },
-    ];
+    const movies: Movie[] = moviesFixture(false);
 
     const wrapper = mount(
       <SearchResults
@@ -65,20 +63,13 @@ describe('Search', () => {
   });
 
   test('nominated movies are rendered', () => {
-    const nominees: Movie[] = [
-      {
-        key: 'Tenet (2020)',
-        title: 'Tenet',
-        year: '2020',
-        nominated: true,
-      },
-    ];
+    const nominees: Movie[] = moviesFixture(true);
 
     const wrapper = mount(
       <Nominations
         nominees={nominees}
         removeNominee={() => {}}
-      />
+      />,
     );
 
     const component = wrapper.find(Nominee);
@@ -87,14 +78,7 @@ describe('Search', () => {
   });
 
   test('nominate button of a nominated movie is disabled', () => {
-    const movies: Movie[] = [
-      {
-        key: 'Tenet (2020)',
-        title: 'Tenet',
-        year: '2020',
-        nominated: true,
-      },
-    ];
+    const movies: Movie[] = moviesFixture(true);
 
     const wrapper = mount(
       <SearchResults
@@ -110,47 +94,16 @@ describe('Search', () => {
 
 describe('Banner', () => {
   test('renders message when there are 5 nominees', () => {
-    const nominees: Movie[] = [
-      {
-        key: 'Tenet (2020)',
-        title: 'Tenet',
-        year: '2020',
-        nominated: true,
-      },
-      {
-        key: 'Vertigo (1958)',
-        title: 'Vertigo',
-        year: '1958',
-        nominated: true,
-      },
-      {
-        key: 'Pulp Fiction (1994)',
-        title: 'Pulp Fiction',
-        year: '1994',
-        nominated: true,
-      },
-      {
-        key: 'Cinema Paradiso (1988)',
-        title: 'Cinema Paradiso',
-        year: '1988',
-        nominated: true,
-      },
-      {
-        key: 'Isle of Dogs (2018)',
-        title: 'Isle of Dogs',
-        year: '2018',
-        nominated: true,
-      },
-    ];
+    const nominees: Movie[] = fullNomineesListFixture();
 
     const wrapper = mount(
-      <Search />
+      <Search />,
     );
-    wrapper.setState({nominees: nominees})
+    wrapper.setState({ nominees });
 
     const component = wrapper.find(Banner);
     expect(component.find(Alert).text()).toEqual(
-      '🥳 Congrats! You have nominated 5 films. Feel free to edit your choices as you need.'
+      '🥳 Congrats! You have nominated 5 films. Feel free to edit your choices as you need.',
     );
   });
 });
