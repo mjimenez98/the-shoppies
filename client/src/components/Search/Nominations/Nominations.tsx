@@ -1,4 +1,5 @@
 import React from 'react';
+import { BDiv } from 'bootstrap-4-react';
 
 import { Movie } from '../SearchBar';
 import Nominee from './Nominee';
@@ -23,20 +24,20 @@ class Nominations extends React.Component<Props, unknown> {
   render(): React.ReactNode {
     const { nominees, removeNominee } = this.props;
     return (
-      <div>
-        <div>
+      <BDiv>
+        <BDiv display="flex" justifyContent="center" mb="4">
           <h5>My Nominations</h5>
-        </div>
-        <div>
+        </BDiv>
+        <BDiv>
           {nominees.map((movie: Movie) => (
             <Nominee
-              key={movie.title}
+              key={movie.id}
               movie={movie}
               removeNominee={removeNominee}
             />
           ))}
-        </div>
-      </div>
+        </BDiv>
+      </BDiv>
     );
   }
 }

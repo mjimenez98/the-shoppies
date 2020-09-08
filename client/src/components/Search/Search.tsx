@@ -1,5 +1,7 @@
 import React from 'react';
-import { Col, Container, Row } from 'bootstrap-4-react';
+import {
+  BSpan, Col, Container, Row,
+} from 'bootstrap-4-react';
 
 import Banner from './Banner';
 import { Movie, SearchBar } from './SearchBar';
@@ -32,8 +34,8 @@ class Search extends React.Component<unknown, States> {
 
   private addNominee(movie: Movie): void {
     const { movieResults, nominees } = this.state;
-    const isNominated = this.keyIndexInNominees(movie.key);
-    const keyIndexInMovieResults = this.keyIndexInMovieResults(movie.key);
+    const isNominated = this.keyIndexInNominees(movie.id);
+    const keyIndexInMovieResults = this.keyIndexInMovieResults(movie.id);
 
     if (nominees.length < 5 && isNominated === -1) {
       const newNominees = nominees;
@@ -47,8 +49,8 @@ class Search extends React.Component<unknown, States> {
 
   private removeNominee(movie: Movie): void {
     const { movieResults, nominees } = this.state;
-    const isNominated = this.keyIndexInNominees(movie.key);
-    const keyIndexInMovieResults = this.keyIndexInMovieResults(movie.key);
+    const isNominated = this.keyIndexInNominees(movie.id);
+    const keyIndexInMovieResults = this.keyIndexInMovieResults(movie.id);
 
     if (isNominated !== -1) {
       let newNominees = nominees;
@@ -74,7 +76,7 @@ class Search extends React.Component<unknown, States> {
     let nominatedIndex = -1;
 
     nominees.forEach((movie, index) => {
-      if (key.localeCompare(movie.key) === 0) {
+      if (key.localeCompare(movie.id) === 0) {
         nominatedIndex = index;
       }
     });
@@ -91,7 +93,7 @@ class Search extends React.Component<unknown, States> {
     let resultsIndex = -1;
 
     movieResults.forEach((movie, index) => {
-      if (key.localeCompare(movie.key) === 0) {
+      if (key.localeCompare(movie.id) === 0) {
         resultsIndex = index;
       }
     });
@@ -101,36 +103,49 @@ class Search extends React.Component<unknown, States> {
 
   render(): React.ReactNode {
     const { movieResults, nominees } = this.state;
+    const boxStyle = {
+      display: 'block',
+      padding: '2rem',
+      backgroundColor: '#F6F6F7',
+    };
     return (
-      <Container fluid>
+      <Container mb="5">
+        <Container mt="5" mb="5">
+          <BSpan style={boxStyle} border shadow="sm">
+            <Row justifyContent="center">
+              <Col col="md-6">
+                <SearchBar
+                  nominees={nominees}
+                  isNominated={this.keyIndexInNominees}
+                  keyIndexInMovieResults={this.keyIndexInMovieResults}
+                  sendMovies={this.getMovies}
+                />
+              </Col>
+            </Row>
+          </BSpan>
+        </Container>
         {(nominees.length === 5)
           ? (
             <Container>
               <Row justifyContent="center">
-                <Banner />
+                <Col>
+                  <Banner />
+                </Col>
               </Row>
             </Container>
           )
           : (null)}
-        <Container fluid my="5">
-          <Row justifyContent="center">
-            <Col col="md-6">
-              <SearchBar
-                nominees={nominees}
-                isNominated={this.keyIndexInNominees}
-                keyIndexInMovieResults={this.keyIndexInMovieResults}
-                sendMovies={this.getMovies}
-              />
-            </Col>
-          </Row>
-        </Container>
-        <Container fluid>
+        <Container>
           <Row>
-            <Col col="md-6">
-              <SearchResults movieResults={movieResults} addNominee={this.addNominee} />
+            <Col col="md-6" mb="5">
+              <BSpan style={boxStyle} border shadow="sm">
+                <SearchResults movieResults={movieResults} addNominee={this.addNominee} />
+              </BSpan>
             </Col>
             <Col col="md-6">
-              <Nominations nominees={nominees} removeNominee={this.removeNominee} />
+              <BSpan style={boxStyle} border shadow="sm">
+                <Nominations nominees={nominees} removeNominee={this.removeNominee} />
+              </BSpan>
             </Col>
           </Row>
         </Container>
