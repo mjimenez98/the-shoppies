@@ -107,14 +107,14 @@ class Search extends React.Component<unknown, States> {
           ? (
             <Container>
               <Row justifyContent="center">
-                <Col col="md-6">
+                <Col md="6">
                   <Banner />
                 </Col>
               </Row>
             </Container>
           )
           : (null)}
-        <Container my="5">
+        <Container mt="5" mb="5">
           <Row justifyContent="center">
             <Col col="md-6">
               <SearchBar
