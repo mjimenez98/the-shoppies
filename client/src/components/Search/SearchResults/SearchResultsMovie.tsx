@@ -32,8 +32,8 @@ class SearchResultsMovie extends React.Component<Props, States> {
       <Container>
         <Row my="3" justifyContent="center">
           <Col col="8">
-            <BDiv key={movie.key}>
-              { movie.key }
+            <BDiv key={movie.id}>
+              { `${movie.title} (${movie.year})` }
             </BDiv>
           </Col>
           <Col col="4" display="flex" justifyContent="center" alignSelf="center">

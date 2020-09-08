@@ -31,7 +31,7 @@ class SearchResults extends React.Component<Props, unknown> {
         <BDiv>
           {movieResults.map((movie: Movie) => (
             <SearchResultsMovie
-              key={movie.key}
+              key={movie.id}
               movie={movie}
               addNominee={addNominee}
             />

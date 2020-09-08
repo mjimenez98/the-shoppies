@@ -4,7 +4,7 @@ import {
 } from 'bootstrap-4-react';
 
 export interface Movie {
-  key: string,
+  id: string,
   title: string,
   year: string,
   nominated: boolean,
@@ -13,6 +13,7 @@ export interface Movie {
 export interface OMDbMovie {
   Title: string,
   Year: string,
+  imdbID: string,
 }
 
 interface Props {
@@ -61,7 +62,7 @@ export class SearchBar extends React.Component<Props, States> {
 
       const movies = resMovies.map((movie) => {
         const newMovie: Movie = {
-          key: `${movie.Title} (${movie.Year})`,
+          id: movie.imdbID,
           title: movie.Title,
           year: movie.Year,
           nominated: this.isNominated(`${movie.Title} (${movie.Year})`) !== -1,

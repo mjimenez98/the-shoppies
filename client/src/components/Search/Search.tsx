@@ -32,8 +32,8 @@ class Search extends React.Component<unknown, States> {
 
   private addNominee(movie: Movie): void {
     const { movieResults, nominees } = this.state;
-    const isNominated = this.keyIndexInNominees(movie.key);
-    const keyIndexInMovieResults = this.keyIndexInMovieResults(movie.key);
+    const isNominated = this.keyIndexInNominees(movie.id);
+    const keyIndexInMovieResults = this.keyIndexInMovieResults(movie.id);
 
     if (nominees.length < 5 && isNominated === -1) {
       const newNominees = nominees;
@@ -47,8 +47,8 @@ class Search extends React.Component<unknown, States> {
 
   private removeNominee(movie: Movie): void {
     const { movieResults, nominees } = this.state;
-    const isNominated = this.keyIndexInNominees(movie.key);
-    const keyIndexInMovieResults = this.keyIndexInMovieResults(movie.key);
+    const isNominated = this.keyIndexInNominees(movie.id);
+    const keyIndexInMovieResults = this.keyIndexInMovieResults(movie.id);
 
     if (isNominated !== -1) {
       let newNominees = nominees;
@@ -74,7 +74,7 @@ class Search extends React.Component<unknown, States> {
     let nominatedIndex = -1;
 
     nominees.forEach((movie, index) => {
-      if (key.localeCompare(movie.key) === 0) {
+      if (key.localeCompare(movie.id) === 0) {
         nominatedIndex = index;
       }
     });
@@ -91,7 +91,7 @@ class Search extends React.Component<unknown, States> {
     let resultsIndex = -1;
 
     movieResults.forEach((movie, index) => {
-      if (key.localeCompare(movie.key) === 0) {
+      if (key.localeCompare(movie.id) === 0) {
         resultsIndex = index;
       }
     });

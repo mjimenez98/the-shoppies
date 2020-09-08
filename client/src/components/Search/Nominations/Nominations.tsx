@@ -31,7 +31,7 @@ class Nominations extends React.Component<Props, unknown> {
         <BDiv>
           {nominees.map((movie: Movie) => (
             <Nominee
-              key={movie.title}
+              key={movie.id}
               movie={movie}
               removeNominee={removeNominee}
             />
