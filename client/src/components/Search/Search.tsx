@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, Row } from 'bootstrap-4-react';
+import { BSpan, Col, Container, Row } from 'bootstrap-4-react';
 
 import Banner from './Banner';
 import { Movie, SearchBar } from './SearchBar';
@@ -101,38 +101,49 @@ class Search extends React.Component<unknown, States> {
 
   render(): React.ReactNode {
     const { movieResults, nominees } = this.state;
+    const boxStyle = {
+      display: 'block',
+      padding: '2rem',
+      backgroundColor: '#F6F6F7'
+    }
     return (
-      <Container>
+      <Container mb="5">
+        <Container mt="5" mb="5">
+          <BSpan style={boxStyle} border shadow="sm">
+            <Row justifyContent="center">
+              <Col col="md-6">
+                <SearchBar
+                  nominees={nominees}
+                  isNominated={this.keyIndexInNominees}
+                  keyIndexInMovieResults={this.keyIndexInMovieResults}
+                  sendMovies={this.getMovies}
+                />
+              </Col>
+            </Row>
+          </BSpan>
+        </Container>
         {(nominees.length === 5)
           ? (
             <Container>
               <Row justifyContent="center">
-                <Col md="6">
+                <Col>
                   <Banner />
                 </Col>
               </Row>
             </Container>
           )
           : (null)}
-        <Container mt="5" mb="5">
-          <Row justifyContent="center">
-            <Col col="md-6">
-              <SearchBar
-                nominees={nominees}
-                isNominated={this.keyIndexInNominees}
-                keyIndexInMovieResults={this.keyIndexInMovieResults}
-                sendMovies={this.getMovies}
-              />
-            </Col>
-          </Row>
-        </Container>
         <Container>
           <Row>
-            <Col col="md-6">
-              <SearchResults movieResults={movieResults} addNominee={this.addNominee} />
+            <Col col="md-6" mb="5">
+              <BSpan style={boxStyle} border shadow="sm">
+                <SearchResults movieResults={movieResults} addNominee={this.addNominee} />
+              </BSpan>
             </Col>
             <Col col="md-6">
-              <Nominations nominees={nominees} removeNominee={this.removeNominee} />
+              <BSpan style={boxStyle} border shadow="sm">
+                <Nominations nominees={nominees} removeNominee={this.removeNominee} />
+              </BSpan>
             </Col>
           </Row>
         </Container>

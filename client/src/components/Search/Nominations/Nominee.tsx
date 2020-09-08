@@ -25,7 +25,7 @@ class Nominee extends React.Component<Props, unknown> {
     const { movie } = this.props;
     return (
       <Container>
-        <Row my="2" justifyContent="center">
+        <Row my="3" justifyContent="center">
           <Col col="8">
             <BDiv key={movie.key}>
               { movie.key }
@@ -33,7 +33,13 @@ class Nominee extends React.Component<Props, unknown> {
           </Col>
           <Col col="4" display="flex" justifyContent="center" alignSelf="center">
             <BDiv>
-              <Button light sm onClick={this.removeNominee}>Remove</Button>
+              <Button
+                style={{backgroundColor: '#0D5946', color: '#FFFFFF'}}
+                sm
+                onClick={this.removeNominee}
+              >
+                Remove
+              </Button>
             </BDiv>
           </Col>
         </Row>

@@ -95,7 +95,7 @@ export class SearchBar extends React.Component<Props, States> {
       <div>
         <Form>
           <Form.Group>
-            <label htmlFor="search">Search for your favorite movies to nominate</label>
+            <label htmlFor="search" style={{fontSize: '1.5em'}}>Search for your favorite movies to nominate</label>
             <Form.Input
               type="text"
               id="search"

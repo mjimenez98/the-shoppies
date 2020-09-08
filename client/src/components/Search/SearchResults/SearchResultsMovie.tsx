@@ -30,7 +30,7 @@ class SearchResultsMovie extends React.Component<Props, States> {
     const { movie } = this.props;
     return (
       <Container>
-        <Row my="2" justifyContent="center">
+        <Row my="3" justifyContent="center">
           <Col col="8">
             <BDiv key={movie.key}>
               { movie.key }
@@ -39,7 +39,7 @@ class SearchResultsMovie extends React.Component<Props, States> {
           <Col col="4" display="flex" justifyContent="center" alignSelf="center">
             <BDiv>
               <Button
-                light
+                style={{backgroundColor: '#0D5946', color: '#FFFFFF'}}
                 sm
                 disabled={movie.nominated}
                 onClick={this.addNominee}
