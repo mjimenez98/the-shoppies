@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Col, Button, Row,
+  BDiv, Col, Button, Row, Container
 } from 'bootstrap-4-react';
 
 import { Movie } from '../SearchBar';
@@ -29,25 +29,27 @@ class SearchResultsMovie extends React.Component<Props, States> {
   render(): React.ReactNode {
     const { movie } = this.props;
     return (
-      <Row my="2" alignItems="center">
-        <Col>
-          <div key={movie.key}>
-            { movie.key }
-          </div>
-        </Col>
-        <Col>
-          <div>
-            <Button
-              light
-              sm
-              disabled={movie.nominated}
-              onClick={this.addNominee}
-            >
-              Nominate
-            </Button>
-          </div>
-        </Col>
-      </Row>
+      <Container>
+        <Row my="2" justifyContent="center">
+          <Col col="8">
+            <BDiv key={movie.key}>
+              { movie.key }
+            </BDiv>
+          </Col>
+          <Col col="4" display="flex" justifyContent="center" alignSelf="center">
+            <BDiv>
+              <Button
+                light
+                sm
+                disabled={movie.nominated}
+                onClick={this.addNominee}
+              >
+                Nominate
+              </Button>
+            </BDiv>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

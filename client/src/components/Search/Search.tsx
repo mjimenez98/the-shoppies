@@ -102,17 +102,19 @@ class Search extends React.Component<unknown, States> {
   render(): React.ReactNode {
     const { movieResults, nominees } = this.state;
     return (
-      <Container fluid>
+      <Container>
         {(nominees.length === 5)
           ? (
             <Container>
               <Row justifyContent="center">
-                <Banner />
+                <Col col="md-6">
+                  <Banner />
+                </Col>
               </Row>
             </Container>
           )
           : (null)}
-        <Container fluid my="5">
+        <Container my="5">
           <Row justifyContent="center">
             <Col col="md-6">
               <SearchBar
@@ -124,7 +126,7 @@ class Search extends React.Component<unknown, States> {
             </Col>
           </Row>
         </Container>
-        <Container fluid>
+        <Container>
           <Row>
             <Col col="md-6">
               <SearchResults movieResults={movieResults} addNominee={this.addNominee} />

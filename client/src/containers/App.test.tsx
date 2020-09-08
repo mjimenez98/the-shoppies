@@ -58,7 +58,7 @@ describe('Search', () => {
     );
 
     const component = wrapper.find(SearchResultsMovie);
-    expect(component.find('div').at(1).text()).toEqual(movies[0].key);
+    expect(component.find('div').at(2).text()).toEqual(movies[0].key);
     expect(component.find(Button).text()).toEqual('Nominate');
   });
 
@@ -73,7 +73,7 @@ describe('Search', () => {
     );
 
     const component = wrapper.find(Nominee);
-    expect(component.find('div').at(1).text()).toEqual(nominees[0].key);
+    expect(component.find('div').at(2).text()).toEqual(nominees[0].key);
     expect(component.find(Button).text()).toEqual('Remove');
   });
 

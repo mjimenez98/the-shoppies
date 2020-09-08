@@ -1,4 +1,5 @@
 import React from 'react';
+import { BDiv } from 'bootstrap-4-react';
 
 import { Movie } from '../SearchBar';
 import SearchResultsMovie from './SearchResultsMovie';
@@ -23,11 +24,11 @@ class SearchResults extends React.Component<Props, unknown> {
   render(): React.ReactNode {
     const { movieResults, addNominee } = this.props;
     return (
-      <div>
-        <div>
+      <BDiv>
+        <BDiv display="flex" justifyContent="center" mb="4">
           <h5>Search Results</h5>
-        </div>
-        <div>
+        </BDiv>
+        <BDiv>
           {movieResults.map((movie: Movie) => (
             <SearchResultsMovie
               key={movie.key}
@@ -35,8 +36,8 @@ class SearchResults extends React.Component<Props, unknown> {
               addNominee={addNominee}
             />
           ))}
-        </div>
-      </div>
+        </BDiv>
+      </BDiv>
     );
   }
 }
