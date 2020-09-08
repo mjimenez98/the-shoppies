@@ -39,7 +39,7 @@ class SearchResultsMovie extends React.Component<Props, States> {
           <Col col="4" display="flex" justifyContent="center" alignSelf="center">
             <BDiv>
               <Button
-                style={{backgroundColor: '#0D5946', color: '#FFFFFF'}}
+                style={{ backgroundColor: '#0D5946', color: '#FFFFFF' }}
                 sm
                 disabled={movie.nominated}
                 onClick={this.addNominee}

@@ -34,7 +34,7 @@ class Nominee extends React.Component<Props, unknown> {
           <Col col="4" display="flex" justifyContent="center" alignSelf="center">
             <BDiv>
               <Button
-                style={{backgroundColor: '#0D5946', color: '#FFFFFF'}}
+                style={{ backgroundColor: '#0D5946', color: '#FFFFFF' }}
                 sm
                 onClick={this.removeNominee}
               >

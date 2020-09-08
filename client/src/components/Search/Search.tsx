@@ -1,5 +1,7 @@
 import React from 'react';
-import { BSpan, Col, Container, Row } from 'bootstrap-4-react';
+import {
+  BSpan, Col, Container, Row,
+} from 'bootstrap-4-react';
 
 import Banner from './Banner';
 import { Movie, SearchBar } from './SearchBar';
@@ -104,8 +106,8 @@ class Search extends React.Component<unknown, States> {
     const boxStyle = {
       display: 'block',
       padding: '2rem',
-      backgroundColor: '#F6F6F7'
-    }
+      backgroundColor: '#F6F6F7',
+    };
     return (
       <Container mb="5">
         <Container mt="5" mb="5">
